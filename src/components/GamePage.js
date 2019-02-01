@@ -76,8 +76,9 @@ class GamePage extends React.Component {
     }
 
     giveUp() {
-        this.setState(Object.assign({}, DEFAULT_INITIAL_STATE, {
+        this.setState(Object.assign({}, RESET_STATE, {
             messagesDivText: "The correct answer was " + this.state.answer,
+            tries: 0
         }));
     }
 
@@ -127,8 +128,9 @@ class GamePage extends React.Component {
 
     ifWinner() {
         if (isWinner(this.state)) {
-            this.setState(Object.assign({}, DEFAULT_INITIAL_STATE, {
+            this.setState(Object.assign({}, RESET_STATE, {
                 messagesDivText: "You are a WINNER!!!",
+                tries: 8
             }));
         }
     }
@@ -187,7 +189,7 @@ class GamePage extends React.Component {
     }
 
     renderButton(id, className, onClick, text) {
-        return (<Button id={id} className={className} onClick={onClick} text={text} />)
+        return (<Button id={id} className={className} onClick={onClick} text={text} />);
     }
 
     renderHangmanDrawing() {
@@ -229,6 +231,21 @@ const DEFAULT_INITIAL_STATE = Object.freeze({
     startGameButtonHide: false,
     gameIsHappening: false,
     tries: 0,
+    answer: '',
+    blanksArray: '',
+    hideHintButton: true,
+    hideGiveUpButton: true,
+    hideUseKeyboard: true,
+    hideIncorrectLetters: true,
+    messagesDivText: '',
+    hideTries: true,
+    word: '',
+});
+
+const RESET_STATE = Object.freeze({
+    guessedLetters: [],
+    startGameButtonHide: false,
+    gameIsHappening: false,
     answer: '',
     blanksArray: '',
     hideHintButton: true,
