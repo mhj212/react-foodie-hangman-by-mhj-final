@@ -300,7 +300,6 @@ const DEFAULT_INITIAL_STATE = Object.freeze({
     messagesDivText: '',
     hideTries: true,
     word: '',
-    modalShow: false,
     hideYesMobileTabletButton: false,
     hideNoMobileTabletButton: false,
     isMobileOrTablet: false,
