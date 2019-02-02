@@ -17,10 +17,7 @@ class GamePage extends React.Component {
         this.hintFunc = this.hintFunc.bind(this);
         this.ifWinner = this.ifWinner.bind(this);
         this.giveUp = this.giveUp.bind(this);
-        this.yesMobileTablet = this.yesMobileTablet.bind(this);
-        this.noMobileTablet = this.noMobileTablet.bind(this);
         this.openKeyboard = this.openKeyboard.bind(this);
-        this.toggleInterface = this.toggleInterface.bind(this);
     }
 
     componentDidMount() {
@@ -33,24 +30,6 @@ class GamePage extends React.Component {
 
     componentWillUnmount() {
         document.removeEventListener("keydown", this.keyDownEvent, false);
-    }
-
-    yesMobileTablet() {
-
-        console.log('wurfl',WURFL);
-        this.setState({ isMobileOrTablet: true, 
-                        hideGameInterface: false,
-                        hideChooseGameInterface: true});
-    }
-
-    noMobileTablet() {
-        this.setState({ isMobileOrTablet: false, 
-                        hideGameInterface: false,
-                        hideChooseGameInterface: true });
-    }
-
-    toggleInterface(){
-        this.setState({ isMobileOrTablet: !this.state.isMobileOrTablet });
     }
 
     keyDownEvent(event) {
@@ -237,37 +216,20 @@ class GamePage extends React.Component {
         return (<HangmanDrawing tries={this.state.tries}/>);
     }
 
-    renderMobileTabletQuestion(){
-        return(<h3>Are you playing on a mobile or tablet?</h3>);
-    }
-    
-    renderHiddenInputForMobileAndTabletKeyboard(){
-        if(isMobileOrTablet(this.state)){
-            return(<input id="hiddeninput" type="text"></input>);
-        }
-        
-    }
+
+
     render() {
         const startButtonClassName = this.state.startGameButtonHide ? "Btn hide" : "Btn";
         const giveUpButtonClassName = this.state.hideGiveUpButton ? "Btn hide" : "Btn";
         const hintButtonClassName = this.state.hideHintButton ? "Btn hide" : "Btn";
-
-        const yesMobileTabletButtonClassName = this.state.hideYesMobileTabletButton ? "Btn hide" : "Btn";
-        const noMobileTabletButtonClassName = this.state.hideNoMobileTabletButton ? "Btn hide" : "Btn";
-
-        const chooseGameInterface = this.state.hideChooseGameInterface ? "hide" : "";
-        const gameInterfaceClassName = this.state.hideGameInterface ? "hide" : "";
         
-        const toggleInterfaceText = this.state.isMobileOrTablet ? "Switch to standard view" : "Switch to mobile/tablet view";
-
         return (
             <div id="container">
                 <div id="innerContainer">
                     {this.renderTitle()}
                     
-                    <div id="game-interface" className={gameInterfaceClassName}>
+                    <div id="game-interface" >
                         {this.renderKeyBoardMessage()}
-                        {this.renderHiddenInputForMobileAndTabletKeyboard()}
                         {this.renderBreak()}
                         {this.renderMessages()}
                         {this.renderWord()}
@@ -278,7 +240,6 @@ class GamePage extends React.Component {
                         {this.renderButton("giveupbutton", giveUpButtonClassName, this.giveUp, "Give Up")}
                         {this.renderButton("hintbutton", hintButtonClassName, this.hintFunc, "Hint")}
                         {this.renderHangmanDrawing()}  
-                        {this.renderButton("toggleinterface", "Btn customSmallerBtn", this.toggleInterface, toggleInterfaceText)}                      
                     </div>
                 </div>
             </div>
@@ -308,7 +269,7 @@ const DEFAULT_INITIAL_STATE = Object.freeze({
     word: '',
     hideYesMobileTabletButton: false,
     hideNoMobileTabletButton: false,
-    isMobileOrTablet: false,
+    isMobileOrTablet: window.WURFL.is_mobile,
     hideGameInterface: true,
     hideChooseGameInterface: false
 });
