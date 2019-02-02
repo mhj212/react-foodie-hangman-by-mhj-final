@@ -49,8 +49,9 @@
   visibility: hidden;
 }
 
-.hidden-input{
+#hidden-input{
   visibility: hidden;
+  height: 1px;
 }
 
 @media (max-width: 500px){
