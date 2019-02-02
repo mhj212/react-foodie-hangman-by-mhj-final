@@ -216,7 +216,12 @@ class GamePage extends React.Component {
         return (<HangmanDrawing tries={this.state.tries}/>);
     }
 
-
+    renderHiddenInputForMobileAndTabletKeyboard(){
+        if(isMobileOrTablet(this.state)){
+            return(<input id="hiddeninput" type="text"></input>);
+        }
+        
+    }
 
     render() {
         const startButtonClassName = this.state.startGameButtonHide ? "Btn hide" : "Btn";
@@ -230,6 +235,7 @@ class GamePage extends React.Component {
                     
                     <div id="game-interface" >
                         {this.renderKeyBoardMessage()}
+                        {this.renderHiddenInputForMobileAndTabletKeyboard()}
                         {this.renderBreak()}
                         {this.renderMessages()}
                         {this.renderWord()}
