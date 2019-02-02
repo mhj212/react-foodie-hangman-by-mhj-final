@@ -20,6 +20,7 @@ class GamePage extends React.Component {
         this.yesMobileTablet = this.yesMobileTablet.bind(this);
         this.noMobileTablet = this.noMobileTablet.bind(this);
         this.openKeyboard = this.openKeyboard.bind(this);
+        this.toggleInterface = this.toggleInterface.bind(this);
     }
 
     componentDidMount() {
@@ -44,6 +45,10 @@ class GamePage extends React.Component {
         this.setState({ isMobileOrTablet: false, 
                         hideGameInterface: false,
                         hideChooseGameInterface: true });
+    }
+
+    toggleInterface(){
+        this.setState({ isMobileOrTablet: !this.state.isMobileOrTablet });
     }
 
     keyDownEvent(event) {
@@ -236,7 +241,7 @@ class GamePage extends React.Component {
     
     renderHiddenInputForMobileAndTabletKeyboard(){
         if(isMobileOrTablet(this.state)){
-            return(<input id="hidden-input" type="text"></input>);
+            return(<input id="hiddeninput" type="text"></input>);
         }
         
     }
@@ -250,7 +255,8 @@ class GamePage extends React.Component {
 
         const chooseGameInterface = this.state.hideChooseGameInterface ? "hide" : "";
         const gameInterfaceClassName = this.state.hideGameInterface ? "hide" : "";
-
+        
+        const toggleInterfaceText = this.state.isMobileOrTablet ? "Switch to standard view" : "Switch to mobile/tablet view";
 
         return (
             <div id="container">
@@ -273,7 +279,8 @@ class GamePage extends React.Component {
                         {this.renderButton("startgame", startButtonClassName, this.startGame, "Start a new game")}
                         {this.renderButton("giveupbutton", giveUpButtonClassName, this.giveUp, "Give Up")}
                         {this.renderButton("hintbutton", hintButtonClassName, this.hintFunc, "Hint")}
-                        {this.renderHangmanDrawing()}                        
+                        {this.renderHangmanDrawing()}  
+                        {this.renderButton("toggleinterface", "Btn toggleInterfaceBtn", this.toggleInterface, toggleInterfaceText)}                      
                     </div>
                 </div>
             </div>
