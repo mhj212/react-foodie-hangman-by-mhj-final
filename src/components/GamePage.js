@@ -36,6 +36,8 @@ class GamePage extends React.Component {
     }
 
     yesMobileTablet() {
+
+        console.log('wurfl',WURFL);
         this.setState({ isMobileOrTablet: true, 
                         hideGameInterface: false,
                         hideChooseGameInterface: true});
@@ -262,11 +264,7 @@ class GamePage extends React.Component {
             <div id="container">
                 <div id="innerContainer">
                     {this.renderTitle()}
-                    <div id="choose-game-type" className={chooseGameInterface}>
-                        {this.renderMobileTabletQuestion()}
-                        {this.renderButton('yesmobilebutton',yesMobileTabletButtonClassName,this.yesMobileTablet,"Yes")}
-                        {this.renderButton('nomobilebutton',noMobileTabletButtonClassName,this.noMobileTablet,"No")}
-                    </div>
+                    
                     <div id="game-interface" className={gameInterfaceClassName}>
                         {this.renderKeyBoardMessage()}
                         {this.renderHiddenInputForMobileAndTabletKeyboard()}
