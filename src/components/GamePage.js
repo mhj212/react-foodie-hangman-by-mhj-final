@@ -64,12 +64,12 @@ class GamePage extends React.Component {
 
     openKeyboard () {
         console.log('open keyboard');
-        document.getElementById('keyboard-message').addEventListener('click', function(){
+        
             var inputElement = document.getElementById('hidden-input');
             inputElement.style.visibility = 'visible'; // unhide the input
             inputElement.focus(); // focus on it so keyboard pops
             inputElement.style.visibility = 'hidden'; // hide it again
-        });
+        
 
     }
 
