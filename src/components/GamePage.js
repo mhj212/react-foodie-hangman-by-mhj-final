@@ -267,6 +267,7 @@ class GamePage extends React.Component {
                     </div>
                     <div id="game-interface" className={gameInterfaceClassName}>
                         {this.renderKeyBoardMessage()}
+                        {this.renderHiddenInputForMobileAndTabletKeyboard()}
                         {this.renderBreak()}
                         {this.renderMessages()}
                         {this.renderWord()}
@@ -276,8 +277,7 @@ class GamePage extends React.Component {
                         {this.renderButton("startgame", startButtonClassName, this.startGame, "Start a new game")}
                         {this.renderButton("giveupbutton", giveUpButtonClassName, this.giveUp, "Give Up")}
                         {this.renderButton("hintbutton", hintButtonClassName, this.hintFunc, "Hint")}
-                        {this.renderHangmanDrawing()}
-                        {this.renderHiddenInputForMobileAndTabletKeyboard()}
+                        {this.renderHangmanDrawing()}                        
                     </div>
                 </div>
             </div>
