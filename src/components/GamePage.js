@@ -183,7 +183,7 @@ class GamePage extends React.Component {
     renderKeyBoardMessage() {
         if(isMobileOrTablet(this.state)){
             const className = this.state.hideUseKeyboard ? "hide Btn openKeyboardBtn" : "Btn openKeyboardBtn";
-            return (<button id="keyboard-message" className={className} onClick={this.openKeyboard}>Click here to open keyboard</button>);
+            return (<Button id="keyboard-message" className={className} onClick={this.openKeyboard} text="Click here to open keyboard" />);
 
         } else {
             const className = this.state.hideUseKeyboard ? "hide" : "";
