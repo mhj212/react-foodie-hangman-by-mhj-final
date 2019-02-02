@@ -357,7 +357,7 @@ const isIncorrectGuess = (state, guess) => incorrectLetter(state)(guess);
 
 const onLastTry = state => state.tries === 1;
 
-const finishedGameFromHint = state => state.answer === state.blanksArray.join('');
+const finishedGameFromHint = state => state.answer === state.blanksArray.join('') || state.tries === 0;
 
 const getRandomCharFromArray = array => array[Math.floor(Math.random() * array.length)];
 
