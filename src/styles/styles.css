@@ -12,8 +12,7 @@
   
   background: white;
   border-radius: 5px;
-  min-width: 300px;
-
+  min-width: 270px;
   max-height: 550px;
   overflow-y: auto;
 }
