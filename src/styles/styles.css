@@ -54,6 +54,11 @@
   height: 1px;
 }
 
+.openKeyboardBtn{
+  margin: 0 auto;
+  width: 57%;
+}
+
 @media (max-width: 500px){
   h1{
     font-size: 1.2em;
