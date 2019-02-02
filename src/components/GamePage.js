@@ -2,6 +2,7 @@ import React from 'react';
 import Button from './parts/Button';
 import HangmanDrawing from './parts/HangmanDrawing';
 
+
 class GamePage extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -16,13 +17,33 @@ class GamePage extends React.Component {
         this.hintFunc = this.hintFunc.bind(this);
         this.ifWinner = this.ifWinner.bind(this);
         this.giveUp = this.giveUp.bind(this);
+        this.yesMobileTablet = this.yesMobileTablet.bind(this);
+        this.noMobileTablet = this.noMobileTablet.bind(this);
+        this.openKeyboard = this.openKeyboard.bind(this);
     }
 
     componentDidMount() {
         document.addEventListener("keydown", this.keyDownEvent, false);
     }
+
+    // componentWillMount() {
+        
+    // }
+
     componentWillUnmount() {
         document.removeEventListener("keydown", this.keyDownEvent, false);
+    }
+
+    yesMobileTablet() {
+        this.setState({ isMobileOrTablet: true, 
+                        hideGameInterface: false,
+                        hideChooseGameInterface: true});
+    }
+
+    noMobileTablet() {
+        this.setState({ isMobileOrTablet: false, 
+                        hideGameInterface: false,
+                        hideChooseGameInterface: true });
     }
 
     keyDownEvent(event) {
@@ -39,6 +60,17 @@ class GamePage extends React.Component {
                 this.handleInvalidCharacter();
             }
         }
+    }
+
+    openKeyboard () {
+        console.log('open keyboard');
+        document.getElementById('keyboard-message').addEventListener('click', function(){
+            var inputElement = document.getElementById('hidden-input');
+            inputElement.style.visibility = 'visible'; // unhide the input
+            inputElement.focus(); // focus on it so keyboard pops
+            inputElement.style.visibility = 'hidden'; // hide it again
+        });
+
     }
 
     handleInvalidCharacter() {
@@ -153,9 +185,16 @@ class GamePage extends React.Component {
     }
 
     renderKeyBoardMessage() {
-        const className = this.state.hideUseKeyboard ? "hide" : "";
+        if(isMobileOrTablet(this.state)){
+            const className = this.state.hideUseKeyboard ? "hide" : "";
+            return (<div><span id="keyboard-message" className={className} onClick={this.openKeyboard}>Click here to open keyboard</span>
+                    <br></br><input id="hidden-input" type="text"></input></div>);
 
-        return (<div id="keyboard-message" className={className}>Please use the keyboard</div>);
+        } else {
+            const className = this.state.hideUseKeyboard ? "hide" : "";
+            return (<div id="keyboard-message" className={className}>Please use the keyboard</div>);
+        }
+
     }
 
     renderMessages() {
@@ -196,28 +235,49 @@ class GamePage extends React.Component {
         return (<HangmanDrawing tries={this.state.tries}/>);
     }
 
+    renderMobileTabletQuestion(){
+        return(<h3>Are you playing on a mobile or tablet?</h3>);
+    }
+    
+
     render() {
         const startButtonClassName = this.state.startGameButtonHide ? "Btn hide" : "Btn";
         const giveUpButtonClassName = this.state.hideGiveUpButton ? "Btn hide" : "Btn";
         const hintButtonClassName = this.state.hideHintButton ? "Btn hide" : "Btn";
 
+        const yesMobileTabletButtonClassName = this.state.hideYesMobileTabletButton ? "Btn hide" : "Btn";
+        const noMobileTabletButtonClassName = this.state.hideNoMobileTabletButton ? "Btn hide" : "Btn";
+
+        const chooseGameInterface = this.state.hideChooseGameInterface ? "hide" : "";
+        const gameInterfaceClassName = this.state.hideGameInterface ? "hide" : "";
+
+
         return (
             <div id="container">
                 <div id="innerContainer">
                     {this.renderTitle()}
-                    {this.renderKeyBoardMessage()}
-                    {this.renderBreak()}
-                    {this.renderMessages()}
-                    {this.renderWord()}
-                    {this.renderBreak()}
-                    {this.renderTriesLeftMessage()}
-                    {this.renderIncorrectTriesMessage()}
-                    {this.renderButton("startgame", startButtonClassName, this.startGame, "Start a new game")}
-                    {this.renderButton("giveupbutton", giveUpButtonClassName, this.giveUp, "Give Up")}
-                    {this.renderButton("hintbutton", hintButtonClassName, this.hintFunc, "Hint")}
-                    {this.renderHangmanDrawing()}
+                    <div id="choose-game-type" className={chooseGameInterface}>
+                        {this.renderMobileTabletQuestion()}
+                        {this.renderButton('yesmobilebutton',yesMobileTabletButtonClassName,this.yesMobileTablet,"Yes")}
+                        {this.renderButton('nomobilebutton',noMobileTabletButtonClassName,this.noMobileTablet,"No")}
+                    </div>
+                    <div id="game-interface" className={gameInterfaceClassName}>
+                        {this.renderKeyBoardMessage()}
+                        {this.renderBreak()}
+                        {this.renderMessages()}
+                        {this.renderWord()}
+                        {this.renderBreak()}
+                        {this.renderTriesLeftMessage()}
+                        {this.renderIncorrectTriesMessage()}
+                        {this.renderButton("startgame", startButtonClassName, this.startGame, "Start a new game")}
+                        {this.renderButton("giveupbutton", giveUpButtonClassName, this.giveUp, "Give Up")}
+                        {this.renderButton("hintbutton", hintButtonClassName, this.hintFunc, "Hint")}
+                        {this.renderHangmanDrawing()}
+                    </div>
                 </div>
             </div>
+            
+   
         );
     }
 }
@@ -240,6 +300,12 @@ const DEFAULT_INITIAL_STATE = Object.freeze({
     messagesDivText: '',
     hideTries: true,
     word: '',
+    modalShow: false,
+    hideYesMobileTabletButton: false,
+    hideNoMobileTabletButton: false,
+    isMobileOrTablet: false,
+    hideGameInterface: true,
+    hideChooseGameInterface: false
 });
 
 const RESET_STATE = Object.freeze({
@@ -287,3 +353,5 @@ const onLastTry = state => state.tries === 1;
 const finishedGameFromHint = state => state.answer === state.blanksArray.join('');
 
 const getRandomCharFromArray = array => array[Math.floor(Math.random() * array.length)];
+
+const isMobileOrTablet = state => state.isMobileOrTablet;
