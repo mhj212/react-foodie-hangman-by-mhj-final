@@ -54,12 +54,9 @@
   height: 1px;
 }
 
-.openKeyboardBtn{
-  margin: 0 auto;
-  width: 83%;
-}
 
-.toggleInterfaceBtn{
+
+.customSmallerBtn{
   padding: 4px;
   margin-top: 10px;
   font-size: 10px;

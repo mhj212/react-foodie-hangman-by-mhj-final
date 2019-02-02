@@ -187,11 +187,11 @@ class GamePage extends React.Component {
 
     renderKeyBoardMessage() {
         if(isMobileOrTablet(this.state)){
-            const className = this.state.hideUseKeyboard ? "hide Btn openKeyboardBtn" : "Btn openKeyboardBtn";
+            const className = this.state.hideUseKeyboard ? "hide Btn customSmallerBtn" : "Btn customSmallerBtn";
             return (<Button id="keyboard-message" className={className} onClick={this.openKeyboard} text="Click here to open keyboard" />);
 
         } else {
-            const className = this.state.hideUseKeyboard ? "hide" : "";
+            const className = this.state.hideUseKeyboard ? "hide " : "";
             return (<div id="keyboard-message" className={className}>Please use the keyboard</div>);
         }
 
@@ -280,7 +280,7 @@ class GamePage extends React.Component {
                         {this.renderButton("giveupbutton", giveUpButtonClassName, this.giveUp, "Give Up")}
                         {this.renderButton("hintbutton", hintButtonClassName, this.hintFunc, "Hint")}
                         {this.renderHangmanDrawing()}  
-                        {this.renderButton("toggleinterface", "Btn toggleInterfaceBtn", this.toggleInterface, toggleInterfaceText)}                      
+                        {this.renderButton("toggleinterface", "Btn customSmallerBtn", this.toggleInterface, toggleInterfaceText)}                      
                     </div>
                 </div>
             </div>
