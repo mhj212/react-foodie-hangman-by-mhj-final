@@ -49,7 +49,7 @@ class GamePage extends React.Component {
     }
 
     openKeyboard () {        
-            const inputElement = document.getElementById('hiddeninput');
+            const inputElement = document.getElementById('hidden-input');
             inputElement.style.visibility = 'visible'; // unhide the input
             inputElement.focus(); // focus on it so keyboard pops up
             inputElement.style.visibility = 'hidden'; // hide it again
@@ -64,7 +64,7 @@ class GamePage extends React.Component {
         const stillBlank = index => this.state.blanksArray[index] === '-';
         const correctLetter = index => this.state.answer[index];
 
-        const hintLetter =  getRandomCharFromArray(
+        const hintLetter =  getRandomItemFromArray(
                                 this.state.blanksArray
                                     .map(toIndex)
                                     .filter(stillBlank)
@@ -150,7 +150,7 @@ class GamePage extends React.Component {
     }
 
     startGame() {
-        const answer = getRandomCharFromArray(this.state.words);
+        const answer = getRandomItemFromArray(this.state.words);
         const blanksArray = new Array(answer.length).fill(null).map(_ => '-');
         const word = blanksArray.join(' ');
 
@@ -218,7 +218,7 @@ class GamePage extends React.Component {
 
     renderHiddenInputForMobileAndTabletKeyboard(){
         if(isMobileOrTablet(this.state)){
-            return(<input id="hiddeninput" type="text"></input>);
+            return(<input id="hidden-input" type="text"></input>);
         }
         
     }
@@ -324,6 +324,6 @@ const onLastTry = state => state.tries === 1;
 
 const finishedGameFromHint = state => state.answer === state.blanksArray.join('') || state.tries === 0;
 
-const getRandomCharFromArray = array => array[Math.floor(Math.random() * array.length)];
+const getRandomItemFromArray = array => array[Math.floor(Math.random() * array.length)];
 
 const isMobileOrTablet = state => state.isMobileOrTablet;
