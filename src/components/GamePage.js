@@ -224,7 +224,7 @@ class GamePage extends React.Component {
     }
 
     render() {
-        const startButtonClassName = this.state.startGameButtonHide ? "Btn hide" : "Btn";
+        const startButtonClassName = this.state.hideStartGameButton ? "Btn hide" : "Btn";
         const giveUpButtonClassName = this.state.hideGiveUpButton ? "Btn hide" : "Btn";
         const hintButtonClassName = this.state.hideHintButton ? "Btn hide" : "Btn";
         
@@ -232,21 +232,19 @@ class GamePage extends React.Component {
             <div id="container">
                 <div id="innerContainer">
                     {this.renderTitle()}
-                    
-                    <div id="game-interface" >
-                        {this.renderKeyBoardMessage()}
-                        {this.renderHiddenInputForMobileAndTabletKeyboard()}
-                        {this.renderBreak()}
-                        {this.renderMessages()}
-                        {this.renderWord()}
-                        {this.renderBreak()}
-                        {this.renderTriesLeftMessage()}
-                        {this.renderIncorrectTriesMessage()}
-                        {this.renderButton("startgame", startButtonClassName, this.startGame, "Start a new game")}
-                        {this.renderButton("giveupbutton", giveUpButtonClassName, this.giveUp, "Give Up")}
-                        {this.renderButton("hintbutton", hintButtonClassName, this.hintFunc, "Hint")}
-                        {this.renderHangmanDrawing()}  
-                    </div>
+                    {this.renderKeyBoardMessage()}
+                    {this.renderHiddenInputForMobileAndTabletKeyboard()}
+                    {this.renderBreak()}
+                    {this.renderMessages()}
+                    {this.renderWord()}
+                    {this.renderBreak()}
+                    {this.renderTriesLeftMessage()}
+                    {this.renderIncorrectTriesMessage()}
+                    {this.renderButton("startgame", startButtonClassName, this.startGame, "Start a new game")}
+                    {this.renderButton("giveupbutton", giveUpButtonClassName, this.giveUp, "Give Up")}
+                    {this.renderButton("hintbutton", hintButtonClassName, this.hintFunc, "Hint")}
+                    {this.renderHangmanDrawing()}
+
                 </div>
             </div>
             
@@ -261,7 +259,7 @@ const DEFAULT_WORDS = ["cheese", "tacos", "burrito", "carnitas", "chocolate", "r
 
 const DEFAULT_INITIAL_STATE = Object.freeze({
     guessedLetters: [],
-    startGameButtonHide: false,
+    hideStartGameButton: false,
     gameIsHappening: false,
     tries: 0,
     answer: '',
@@ -275,14 +273,12 @@ const DEFAULT_INITIAL_STATE = Object.freeze({
     word: '',
     hideYesMobileTabletButton: false,
     hideNoMobileTabletButton: false,
-    isMobileOrTablet: window.WURFL.is_mobile,
-    hideGameInterface: true,
-    hideChooseGameInterface: false
+    isMobileOrTablet: window.WURFL.is_mobile
 });
 
 const RESET_STATE = Object.freeze({
     guessedLetters: [],
-    startGameButtonHide: false,
+    hideStartGameButton: false,
     gameIsHappening: false,
     answer: '',
     blanksArray: '',
@@ -297,7 +293,7 @@ const RESET_STATE = Object.freeze({
 
 const START_GAME_INITIAL_STATE = Object.freeze({
     guessedLetters: [],
-    startGameButtonHide: true,
+    hideStartGameButton: true,
     hideHintButton: false,
     hideGiveUpButton: false,
     gameIsHappening: true,
