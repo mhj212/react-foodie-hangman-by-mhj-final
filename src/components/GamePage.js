@@ -51,7 +51,7 @@ class GamePage extends React.Component {
     openKeyboard () {        
             const inputElement = document.getElementById('hiddeninput');
             inputElement.style.visibility = 'visible'; // unhide the input
-            inputElement.focus(); // focus on it so keyboard pops
+            inputElement.focus(); // focus on it so keyboard pops up
             inputElement.style.visibility = 'hidden'; // hide it again
     }
 
@@ -169,7 +169,7 @@ class GamePage extends React.Component {
     renderKeyBoardMessage() {
         if(isMobileOrTablet(this.state)){
             const className = this.state.hideUseKeyboard ? "hide Btn customSmallerBtn" : "Btn customSmallerBtn";
-            return (<Button id="keyboard-message" className={className} onClick={this.openKeyboard} text="Click here to open keyboard" />);
+            return (<Button id="keyboard-message-btn" className={className} onClick={this.openKeyboard} text="Click here to open keyboard" />);
 
         } else {
             const className = this.state.hideUseKeyboard ? "hide " : "";
