@@ -48,9 +48,9 @@ class GamePage extends React.Component {
 
     openKeyboard() {
         const inputElement = document.getElementById('hidden-input');
-        inputElement.style.visibility = 'visible'; // unhide the input
+        // inputElement.style.visibility = 'visible'; // unhide the input
         inputElement.focus(); // focus on it so keyboard pops up
-        inputElement.style.visibility = 'hidden'; // hide it again
+        // inputElement.style.visibility = 'hidden'; // hide it again
     }
 
     handleInvalidCharacter() {
