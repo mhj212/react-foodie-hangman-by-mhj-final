@@ -15,10 +15,6 @@ App.propTypes = {
   children: PropTypes.object.isRequired
 };
 
-// function mapStateToProps(state, ownProps) {
-//   return {
-//     loading: state.ajaxCallsInProgress > 0
-//   };
-// }
+
 
 export default App;
