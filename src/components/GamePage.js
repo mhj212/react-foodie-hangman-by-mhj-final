@@ -25,7 +25,7 @@ class GamePage extends React.Component {
     }
 
     // componentWillMount() {
-        
+
     // }
 
     componentWillUnmount() {
@@ -48,11 +48,11 @@ class GamePage extends React.Component {
         }
     }
 
-    openKeyboard () {        
-            const inputElement = document.getElementById('hidden-input');
-            inputElement.style.visibility = 'visible'; // unhide the input
-            inputElement.focus(); // focus on it so keyboard pops up
-            inputElement.style.visibility = 'hidden'; // hide it again
+    openKeyboard() {
+        const inputElement = document.getElementById('hidden-input');
+        inputElement.style.visibility = 'visible'; // unhide the input
+        inputElement.focus(); // focus on it so keyboard pops up
+        inputElement.style.visibility = 'hidden'; // hide it again
     }
 
     handleInvalidCharacter() {
@@ -64,18 +64,18 @@ class GamePage extends React.Component {
         const stillBlank = index => this.state.blanksArray[index] === '-';
         const correctLetter = index => this.state.answer[index];
 
-        const hintLetter =  getRandomItemFromArray(
-                                this.state.blanksArray
-                                    .map(toIndex)
-                                    .filter(stillBlank)
-                                    .map(correctLetter)
-                            );
+        const hintLetter = getRandomItemFromArray(
+            this.state.blanksArray
+                .map(toIndex)
+                .filter(stillBlank)
+                .map(correctLetter)
+        );
 
         const blanksArray = this.state.answer.split('')
-                                .map((char, idx) => {
-                                    if (char === hintLetter) return char;
-                                    return this.state.blanksArray[idx];
-                                });
+            .map((char, idx) => {
+                if (char === hintLetter) return char;
+                return this.state.blanksArray[idx];
+            });
 
         this.setState(prevState => ({
             guessedLetters: prevState.guessedLetters.concat(hintLetter),
@@ -111,10 +111,10 @@ class GamePage extends React.Component {
     handleCorrectGuess(guess) {
         const guessedLetters = this.state.guessedLetters.concat(guess);
         const blanksArray = this.state.answer.split('')
-                                .map((char, idx) => {
-                                    if (char === guess) return guess;
-                                    return this.state.blanksArray[idx];
-                                });
+            .map((char, idx) => {
+                if (char === guess) return guess;
+                return this.state.blanksArray[idx];
+            });
         const word = blanksArray.join(' ');
 
         this.setState({
@@ -128,7 +128,7 @@ class GamePage extends React.Component {
     }
 
     handleIncorrectGuess(guess) {
-        if(onLastTry(this.state)){
+        if (onLastTry(this.state)) {
             this.giveUp();
         } else {
             this.setState(prevState => ({
@@ -167,7 +167,7 @@ class GamePage extends React.Component {
     }
 
     renderKeyBoardMessage() {
-        if(isMobileOrTablet(this.state)){
+        if (isMobileOrTablet(this.state)) {
             const className = this.state.hideUseKeyboard ? "hide Btn customSmallerBtn" : "Btn customSmallerBtn";
             return (<Button id="keyboard-message-btn" className={className} onClick={this.openKeyboard} text="Click here to open keyboard" />);
 
@@ -213,21 +213,21 @@ class GamePage extends React.Component {
     }
 
     renderHangmanDrawing() {
-        return (<HangmanDrawing tries={this.state.tries}/>);
+        return (<HangmanDrawing tries={this.state.tries} />);
     }
 
-    renderHiddenInputForMobileAndTabletKeyboard(){
-        if(isMobileOrTablet(this.state)){
-            return(<input id="hidden-input" type="text"></input>);
+    renderHiddenInputForMobileAndTabletKeyboard() {
+        if (isMobileOrTablet(this.state)) {
+            return (<input id="hidden-input" type="text"></input>);
         }
-        
+
     }
 
     render() {
         const startButtonClassName = this.state.hideStartGameButton ? "Btn hide" : "Btn";
         const giveUpButtonClassName = this.state.hideGiveUpButton ? "Btn hide" : "Btn";
         const hintButtonClassName = this.state.hideHintButton ? "Btn hide" : "Btn";
-        
+
         return (
             <div id="container">
                 <div id="innerContainer">
@@ -247,15 +247,15 @@ class GamePage extends React.Component {
 
                 </div>
             </div>
-            
-   
+
+
         );
     }
 }
 
 export default GamePage;
 
-const DEFAULT_WORDS = ["cheese", "tacos", "burrito", "carnitas", "chocolate", "rigatoni", "souffle", "coffee", "cappuccino", "ravioli", "tortellini", "eggplant", "tomato", "cherry", "apple", "orange", "carrot", "tiramisu", "strawberry", "mango", "clementine", "sushi", "noodles", "almond", "cashew", "walnut",'breakfast','lunch','dinner','cookie','scone','muffin','babka','doughnut','bacon'];
+const DEFAULT_WORDS = ["cheese", "tacos", "burrito", "carnitas", "chocolate", "rigatoni", "souffle", "coffee", "cappuccino", "ravioli", "tortellini", "eggplant", "tomato", "cherry", "apple", "orange", "carrot", "tiramisu", "strawberry", "mango", "clementine", "sushi", "noodles", "almond", "cashew", "walnut", 'breakfast', 'lunch', 'dinner', 'cookie', 'scone', 'muffin', 'babka', 'doughnut', 'bacon'];
 
 const DEFAULT_INITIAL_STATE = Object.freeze({
     guessedLetters: [],
