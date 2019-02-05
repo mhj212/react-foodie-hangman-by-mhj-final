@@ -24,9 +24,7 @@ class GamePage extends React.Component {
         document.addEventListener("keydown", this.keyDownEvent, false);
     }
 
-    // componentWillMount() {
 
-    // }
 
     componentWillUnmount() {
         document.removeEventListener("keydown", this.keyDownEvent, false);
